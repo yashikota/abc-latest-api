@@ -14,6 +14,7 @@ const handler = async (req: Request) => {
             JSON.stringify({
                 title: latestAbc.title,
                 start: start.toLocaleString(),
+                url: `https://atcoder.jp/contests/${latestAbc.id}`,
             }),
             {
                 headers: {
