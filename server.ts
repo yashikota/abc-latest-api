@@ -13,7 +13,7 @@ const handler = async (req: Request) => {
         return new Response(
             JSON.stringify({
                 title: latestAbc.title,
-                start: start.toLocaleString(),
+                start: start.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" }),
                 url: `https://atcoder.jp/contests/${latestAbc.id}`,
             }),
             {
