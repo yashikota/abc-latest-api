@@ -17,8 +17,12 @@ export const getLatestAbc = async () => {
         for (let i = 0; i < times.length; i++) {
             const time = times[i].textContent.replace("開始", "");
             const date = new Date(time);
+            const weekday = date.toLocaleString("ja-JP", {
+                timeZone: "Asia/Tokyo",
+                weekday: "short",
+            });
             const jst = date.toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
-            times[i].textContent = jst;
+            times[i].textContent = jst.split(" ")[0] + "(" + weekday + ") " + jst.split(" ")[1];
         }
 
         // 2次元配列として格納
