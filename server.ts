@@ -11,6 +11,7 @@ const handler = async (req: Request) => {
                 start: latestAbc[0],
                 title: latestAbc[1],
                 url: latestAbc[2],
+                score: latestAbc[3],
             }),
             {
                 headers: {

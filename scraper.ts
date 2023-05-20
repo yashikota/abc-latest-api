@@ -39,6 +39,27 @@ export const getLatestAbc = async () => {
             contest[1].includes("Beginner")
         ))[0];
 
+        // 配点を取得
+        const contestScore = [];
+        const contestUrl = latestAbc[2];
+
+        // DOMを取得
+        const contestRes = await fetch(contestUrl);
+        const contestHtml = await contestRes.text();
+        const contestDoc: any = new DOMParser().parseFromString(contestHtml, "text/html");
+
+        // 点数のテーブルを取得
+        const table = contestDoc.querySelectorAll(".table.table-responsible.table-striped.table-bordered")[0];
+        const trs = table.querySelectorAll("tbody tr");
+
+        // 点数を格納
+        for (let i = 0; i < trs.length; i++) {
+            const task = trs[i].querySelectorAll("td")[0];
+            const score = trs[i].querySelectorAll("td")[1];
+            contestScore.push([task.textContent, score.textContent]);
+        }
+        latestAbc.push(contestScore);
+
         return latestAbc;
     } catch (error) {
         console.log(error);
